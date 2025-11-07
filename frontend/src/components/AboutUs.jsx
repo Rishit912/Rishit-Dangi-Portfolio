@@ -2,7 +2,7 @@ import React from 'react';
 import { FaHeart, FaCode, FaLaptopCode, FaDatabase, FaServer, FaFigma, FaFileDownload } from 'react-icons/fa';
 // Assume AnimateOnScroll component is imported and functional
 import AnimateOnScroll from './AnimateOnScroll'; 
-import resume from '../assets/Dangi_Rishit_.pdf';
+import resume from '../../public/Dangi_Rishit_.pdf';
 
 // Define core skills data
 const coreSkills = [
