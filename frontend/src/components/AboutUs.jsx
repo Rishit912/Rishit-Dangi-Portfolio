@@ -44,7 +44,7 @@ const AboutUs = () => {
   rel="noopener noreferrer"
   className="bg-[#7B61FF] text-white px-4 py-2 rounded-lg hover:bg-[#6a50ff] transition"
 >
-  View Resume
+  Download My Resume <FaFileDownload className="inline ml-2" />
 </a>
             </div>
         </AnimateOnScroll>
