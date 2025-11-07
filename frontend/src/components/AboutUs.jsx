@@ -39,13 +39,12 @@ const AboutUs = () => {
         {/* --- NEW: Resume Download Bar (Link Updated) --- */}
         <AnimateOnScroll duration="duration-1000" direction="up" delay="delay-100">
             <div className="flex justify-center mb-16 md:mb-24">
-                <a 
-    href={resume} 
-    download="Dangi_Rishit_.pdf" 
-    type="application/pdf"
-    className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-3 text-lg"
+               <a
+  href="/Dangi_RIshit_.pdf"
+  download
+  className="bg-[#7B61FF] text-white px-4 py-2 rounded-lg hover:bg-[#6a50ff] transition"
 >
-    <FaFileDownload /> Download My Resume (PDF)
+  Download Resume
 </a>
             </div>
         </AnimateOnScroll>
