@@ -21,6 +21,7 @@ app.use(express.json());
 const allowedOrigins = [
     'http://localhost:5173',  // Frontend dev server
     'http://localhost:8001', 
+    'https://frontend-three-flax-19.vercel.app',  // Production frontend
     'https://sketchcode-alpha.vercel.app', // <--- YOUR VERCEL URL
     'https://sketchcode.onrender.com', // <--- Your Render URL (optional, but safe)
     'https://sketchcode.one' // <--- YOUR CUSTOM DOMAIN
