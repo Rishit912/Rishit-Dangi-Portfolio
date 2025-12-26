@@ -111,6 +111,8 @@ const Portfolio = () => {
     };
 
     const filteredProjects = filterProjects(PROJECTS, filter);
+
+    const filterButtons = [
         { label: 'All', value: 'all', icon: <CodeIcon className="w-5 h-5" /> },
         { label: 'Web Development', value: 'webDev', icon: <LaptopIcon className="w-5 h-5" /> },
         { label: 'App Development', value: 'appDev', icon: <MobileIcon className="w-5 h-5" /> },
