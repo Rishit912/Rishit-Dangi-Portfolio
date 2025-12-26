@@ -7,7 +7,6 @@ import Portfolio from './components/Portfolio'
 import Contact from './components/ContactUs'
 import Footer from './components/Footer'
 import Home from './components/Home'
-import Login from "./components/Login";
 import TechStack from "./components/TechStack";
 import AdminDashboard from "./components/AdminDashboard";
 import SecretAdminLink from "./components/SecretAdminLink";
@@ -54,7 +53,6 @@ function App() {
          <Route path="/techstack" element={<TechStack />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/admin-link/:key" element={<SecretAdminLink />} />
     <Route path="/admin-dashboard" element={<AdminDashboard />} />
     {/* Ensure admin routes render the AdminDashboard container so the left admin sidebar stays visible
