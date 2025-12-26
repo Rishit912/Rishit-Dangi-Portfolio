@@ -24,7 +24,34 @@ const CodeIcon = ({ className = 'w-4 h-4' }) => (
         <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
     </svg>
 );
-// --- End Refined SVG Icons ---
+
+// Paint Brush Icon (Web Design)
+const PaintBrushIcon = ({ className = 'w-4 h-4' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} focusable="false">
+        <path d="M9.06 11.96l4.98 4.98c.7.7 1.83.7 2.53 0l2.42-2.42c.7-.7.7-1.83 0-2.53l-4.98-4.98"/><path d="M12.5 12.5L5 20"/><path d="M18.5 5.5l-2 2"/>
+    </svg>
+);
+
+// Mobile Icon (App Development)
+const MobileIcon = ({ className = 'w-4 h-4' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} focusable="false">
+        <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>
+    </svg>
+);
+
+// Laptop Icon (Web Development)
+const LaptopIcon = ({ className = 'w-4 h-4' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} focusable="false">
+        <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/>
+    </svg>
+);
+
+// GitHub Icon
+const GithubIcon = ({ className = 'w-4 h-4' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} focusable="false">
+        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.8c0-.7-.4-1.5-1.4-2c3.7-.4 7.5-1.5 7.5-7.5s-3.8-7.1-7.5-7.5c-1.8 0-3.5.7-4.8 1.9C6.8 4.7 5 7.4 5 10.5c0 6 3.8 7.1 7.5 7.5-.2.6-.4 1.2-.4 1.9V22"/>
+    </svg>
+);
 
 
 // --- Hardcoded Projects Data ---
