@@ -27,7 +27,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/" onClick={handleNavClick} className="text-gray-300 hover:text-blue-400 transition">Home</Link></li>
               <li><Link to="/about" onClick={handleNavClick} className="text-gray-300 hover:text-blue-400 transition">About</Link></li>
-              <li><Link to="/services" onClick={handleNavClick} className="text-gray-300 hover:text-blue-400 transition">Services</Link></li>
+              <li><Link to="/TechStack" onClick={handleNavClick} className="text-gray-300 hover:text-blue-400 transition">TechStack</Link></li>
               <li><Link to="/portfolio" onClick={handleNavClick} className="text-gray-300 hover:text-blue-400 transition">Portfolio</Link></li>
               <li><Link to="/contact" onClick={handleNavClick} className="text-gray-300 hover:text-blue-400 transition">Contact</Link></li>
             </ul>
@@ -38,9 +38,9 @@ const Footer = () => {
             <h3 className="text-sm font-semibold text-gray-100 mb-4">Expertise</h3>
             <ul className="space-y-2 text-gray-300">
               <li><Link to="/services#web" onClick={handleNavClick} className="hover:text-blue-400 transition">Web Development</Link></li>
-              <li><Link to="/services#apps" onClick={handleNavClick} className="hover:text-blue-400 transition">Mobile Apps</Link></li>
+              <li><Link to="/services#frontend" onClick={handleNavClick} className="hover:text-blue-400 transition">Frontend Development</Link></li>
               <li><Link to="/services#design" onClick={handleNavClick} className="hover:text-blue-400 transition">UI / UX Design</Link></li>
-              <li><Link to="/services#custom" onClick={handleNavClick} className="hover:text-blue-400 transition">Custom Solutions</Link></li>
+              <li><Link to="/services#apps" onClick={handleNavClick} className="hover:text-blue-400 transition">Mobile Apps</Link></li>
             </ul>
           </div>
 

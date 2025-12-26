@@ -117,8 +117,11 @@ const AdminDashboard = () => {
             {/* Main Content */}
             <main className="flex-1 p-6">
                 {view === 'team' ? (
-                    // Render Team management within the admin layout (embedded)
-                    <TeamManagement embedded={true} />
+                    // Team management placeholder - implement TeamManagement component separately
+                    <div className="bg-white rounded-lg shadow p-6">
+                        <h2 className="text-2xl font-bold mb-4">Team Members Management</h2>
+                        <p className="text-gray-600">Team member management feature coming soon...</p>
+                    </div>
                 ) : (
                     <>
                         {/* Header */}

@@ -19,6 +19,7 @@ app.use(express.json());
 // CORS Configuration (CRITICAL FIX)
 // Replace these with your actual domains
 const allowedOrigins = [
+    'http://localhost:5173',  // Frontend dev server
     'http://localhost:8001', 
     'https://sketchcode-alpha.vercel.app', // <--- YOUR VERCEL URL
     'https://sketchcode.onrender.com', // <--- Your Render URL (optional, but safe)
@@ -27,13 +28,15 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps, Postman, or same-origin)
         if (!origin || allowedOrigins.includes(origin)) {
             return callback(null, true);
         }
         return callback(new Error('Not allowed by CORS'), false);
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    credentials: true
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Route Definitions

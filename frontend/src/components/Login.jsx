@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
-    const [registerStatus, setRegisterStatus] = useState(null); // 'success', 'error', 'idle'
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -29,29 +28,6 @@ const Login = () => {
             setError(error.response?.data?.message || "Login failed. Please check your credentials.");
         }
     };
-    
-    // --- TEMPORARY REGISTRATION FUNCTION (REQUIRED FOR FIRST LOGIN) ---
-    const handleRegister = async () => {
-        setRegisterStatus(null);
-        setError("");
-        
-        if (!formData.email || !formData.password) {
-            setError("Please fill in both email and password to register.");
-            return;
-        }
-
-        try {
-            // This calls the /api/auth/register route we are creating in the backend
-            await api.post(`/api/auth/register`, { ...formData });
-            setRegisterStatus('success');
-            console.log("✅ Registration successful. You can now log in.");
-        } catch (registerError) {
-            console.error("Registration error:", registerError.response?.data || registerError.message);
-            setRegisterStatus('error');
-            setError(registerError.response?.data?.message || "Registration failed. User might already exist.");
-        }
-    };
-    // ----------------------------------------
 
     return (
         <div className="flex py-20 items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-black px-4">
@@ -108,26 +84,11 @@ const Login = () => {
                         </div>
                     )}
                     
-                    {registerStatus === 'success' && (
-                        <div className="p-3 text-sm bg-green-500/10 border border-green-500/20 rounded-lg text-green-400">
-                            Registration successful! Please click Login now.
-                        </div>
-                    )}
-                    
                     <button
                         type="submit"
                         className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition duration-300 shadow-lg hover:shadow-blue-500/30"
                     >
                         Login
-                    </button>
-                    
-                    {/* TEMPORARY BUTTON TO REGISTER FIRST USER */}
-                    <button
-                        type="button"
-                        onClick={handleRegister}
-                        className="w-full py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-xl font-semibold transition duration-300 shadow-lg mt-2"
-                    >
-                        Register First Admin User (Use Once!)
                     </button>
                 </form>
             </div>

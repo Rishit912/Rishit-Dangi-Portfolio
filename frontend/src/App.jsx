@@ -12,6 +12,12 @@ import TechStack from "./components/TechStack";
 import AdminDashboard from "./components/AdminDashboard";
 import Preloader from './components/Preloader';
 import resume from './assets/Dangi_Rishit_.pdf';
+import image from './assets/airbnb.png';
+import gym from './assets/tgym.png';
+import ocs from './assets/ocs.png';
+import gymd from './assets/gymd.jpg';
+import pluscare from './assets/pluscare.png'; 
+import worksyn from './assets/worksync.png';
 
 function App() {
   return (
