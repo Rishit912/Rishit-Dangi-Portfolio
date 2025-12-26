@@ -1,6 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import api from '../api'; // Import API instance to fetch projects from backend
+﻿import React, { useState } from 'react';
 import AnimateOnScroll from './AnimateOnScroll'; 
 import image from '../assets/airbnb.png';
 import gym from '../assets/tgym.png';
@@ -26,159 +24,76 @@ const CodeIcon = ({ className = 'w-4 h-4' }) => (
         <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
     </svg>
 );
-// Paint Brush Icon (Web Design) - Using a simple brush icon
-const PaintBrushIcon = ({ className = 'w-4 h-4' }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} focusable="false">
-        <path d="M9.06 11.96l4.98 4.98c.7.7 1.83.7 2.53 0l2.42-2.42c.7-.7.7-1.83 0-2.53l-4.98-4.98"/><path d="M12.5 12.5L5 20"/><path d="M18.5 5.5l-2 2"/>
-    </svg>
-);
-// Mobile Icon (App Development) - Using the modern "Smartphone" icon
-const MobileIcon = ({ className = 'w-4 h-4' }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} focusable="false">
-        <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>
-    </svg>
-);
-// Laptop Icon (Web Development) - Using the modern "Monitor" icon for better separation from mobile
-const LaptopIcon = ({ className = 'w-4 h-4' }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} focusable="false">
-        <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/>
-    </svg>
-);
-// GitHub Icon
-const GithubIcon = ({ className = 'w-4 h-4' }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} focusable="false">
-        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.8c0-.7-.4-1.5-1.4-2c3.7-.4 7.5-1.5 7.5-7.5s-3.8-7.1-7.5-7.5c-1.8 0-3.5.7-4.8 1.9C6.8 4.7 5 7.4 5 10.5c0 6 3.8 7.1 7.5 7.5-.2.6-.4 1.2-.4 1.9V22"/>
-    </svg>
-);
 // --- End Refined SVG Icons ---
 
 
-// --- Hardcoded Dummy Data ---
-const DUMMY_PROJECTS = [
-
-    {
-        _id: 'p1',
-        title: 'PlusCare',
-        description: 'This is the team project based on the smart appointment system a web-based platform designed to streamline the process of booking doctor€™s appointments. Patients can register, search for doctors, and manage their appointments, while doctors can view schedules and add prescriptions.',
-        category: 'frontendDevelopment',
-        techStack: ['Html', 'css', 'JavaScript', 'bootstrap', 'php'],
-        liveDemo: 'https://pluscare.jaydipsatani.com/',
-        github: '',
-        imageUrls: [pluscare],
-    },
-    {
-        _id: 'p2',
-        title: 'HomesInTheCloudes',
-        description: 'we developed the complete, high-fidelity frontend platform for Homes in the Clouds, a modern property rental marketplace. This client project showcases our ability to deliver production-ready UI/UX, integrating every necessary feature from dynamic search and complex user flows to a flawless mobile experience to launch a market-ready digital product.',
-        category: 'frontendDevelopment',
-        techStack: ['React', 'tailwind-css', 'TypeScript'],
-        liveDemo: 'https://homeintheclouds.netlify.app/',
-        github: '',
-        imageUrls: [image],
-    },
-    {
-        _id: 'p3',
-        title: ' TaskLetix-GYM',
-        description: 'This project is the sleek, powerful frontend for a modern Taskletix-GYM, focusing on high-impact visuals and an intuitive user journey. We crafted a premium, responsive design that emphasizes brand energy and easy navigation, allowing visitors to quickly find class information, membership details, and location data on any device.',
-        category: 'frontendDevelopment',
-        techStack: ['React', 'tailwind-css', 'TypeScript'],
-        liveDemo: 'https://gym-taskletix.netlify.app/',
-        github: '',
-        imageUrls: [gym],
-
-    },
-    {
-        _id: 'p4',
-        title: 'TaskLetix-GYM (Web-Design)',
-        description: 'A high-fidelity prototype designed in Figma for a SaaS analytics dashboard focusing on data visualization and user experience.',
-        category: 'webDesign',
-        techStack: ['Figma', 'UI/UX', 'Prototyping', 'Responsive Design'],
-        liveDemo: 'https://www.figma.com/design/lk7olFDMjPBC15PpKnpn0x/Taskletix-GYM?node-id=0-1&t=BXkEyPQm60lwJVQM-1',
-        github: '',
-        imageUrls: [gymd],
-    },
-    {
-       _id: 'p5',
-        title: 'Festival attire (Web-Design)',
-        description: 'This project delivers the finalized, pixel-perfect UI/UX design files (Figma) for a modern apparel retailer. The design focuses on premium aesthetics with attention to product display, filtering, and detailed product pages. By providing a scalable design architecture, we ensure the client can easily expand their inventory while maintaining a flawless, cohesive brand experience across all screen sizes.',
-        category: 'webDesign',
-        techStack: ['Figma', 'UI/UX', 'Prototyping', 'Responsive Design'],
-        liveDemo: 'https://www.figma.com/design/2M2zqqW4nmzPPau3S6riKx/Taskletix-clothing?node-id=7-128&t=gUlM5SFI7bcvaNAB-1',
-        github: '',
-        imageUrls: [ocs],
-    },
- {
-       _id: 'p6',
-        title: 'WorkSync',
-        description: 'WorkSync connects skilled but uneducated workers with potential employers, helping them find jobs in fields like plumbing, electrical work, and more. It simplifies the job search process for both workers and employers.',
-        category: 'frontendDevelopment',
-        techStack: ['Html', 'css', 'javascript', 'Responsive Design'],
-        liveDemo: 'https://rishit912.github.io/worksync/',
-        github: '',
-        imageUrls: [worksyn],
-    },
-
+// --- Hardcoded Projects Data ---
+const PROJECTS = [
+    {
+        _id: 'p1',
+        title: 'PlusCare',
+        description: 'Team project based on smart appointment system - a web-based platform designed to streamline the process of booking doctor appointments. Patients can register, search for doctors, and manage their appointments, while doctors can view schedules and add prescriptions.',
+        category: 'webDevelopment',
+        techStack: ['Html', 'CSS', 'JavaScript', 'Bootstrap', 'PHP'],
+        liveDemo: 'https://pluscare.jaydipsatani.com/',
+        github: '',
+        imageUrls: [pluscare],
+    },
+    {
+        _id: 'p2',
+        title: 'Homes in the Clouds',
+        description: 'Complete, high-fidelity frontend platform for a modern property rental marketplace. Showcasing production-ready UI/UX with dynamic search, complex user flows, and a flawless mobile experience.',
+        category: 'webDevelopment',
+        techStack: ['React', 'Tailwind CSS', 'TypeScript'],
+        liveDemo: 'https://homeintheclouds.netlify.app/',
+        github: '',
+        imageUrls: [image],
+    },
+    {
+        _id: 'p3',
+        title: 'TaskLetix GYM',
+        description: 'Sleek, powerful frontend for a modern gym platform. Crafted a premium, responsive design emphasizing brand energy and easy navigation with class information and membership details.',
+        category: 'webDevelopment',
+        techStack: ['React', 'Tailwind CSS', 'TypeScript'],
+        liveDemo: 'https://gym-taskletix.netlify.app/',
+        github: '',
+        imageUrls: [gym],
+    },
+    {
+        _id: 'p4',
+        title: 'TaskLetix GYM (Web Design)',
+        description: 'High-fidelity prototype designed in Figma for a modern gym SaaS platform with focus on data visualization and user experience.',
+        category: 'webDesign',
+        techStack: ['Figma', 'UI/UX', 'Prototyping', 'Responsive Design'],
+        liveDemo: 'https://www.figma.com/design/lk7olFDMjPBC15PpKnpn0x/Taskletix-GYM?node-id=0-1&t=BXkEyPQm60lwJVQM-1',
+        github: '',
+        imageUrls: [gymd],
+    },
+    {
+        _id: 'p5',
+        title: 'Festival Attire (Web Design)',
+        description: 'Pixel-perfect UI/UX design files in Figma for a modern apparel retailer. Focuses on premium aesthetics with attention to product display, filtering, and detailed product pages with scalable design architecture.',
+        category: 'webDesign',
+        techStack: ['Figma', 'UI/UX', 'Prototyping', 'Responsive Design'],
+        liveDemo: 'https://www.figma.com/design/2M2zqqW4nmzPPau3S6riKx/Taskletix-clothing?node-id=7-128&t=gUlM5SFI7bcvaNAB-1',
+        github: '',
+        imageUrls: [ocs],
+    },
+    {
+        _id: 'p6',
+        title: 'WorkSync',
+        description: 'Connects skilled workers with potential employers, helping them find jobs in fields like plumbing, electrical work, and more. Simplifies the job search process for both workers and employers.',
+        category: 'webDevelopment',
+        techStack: ['HTML', 'CSS', 'JavaScript', 'Responsive Design'],
+        liveDemo: 'https://rishit912.github.io/worksync/',
+        github: '',
+        imageUrls: [worksyn],
+    },
 ];
-// --- End Hardcoded Dummy Data ---
 
 
 const Portfolio = () => {
     const [filter, setFilter] = useState('all');
-    const [projects, setProjects] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const location = useLocation();
-    const navigate = useNavigate();
-    const [showAddedMsg, setShowAddedMsg] = useState(false);
-
-    // Fetch projects from backend API
-    useEffect(() => {
-        const fetchProjects = async () => {
-            try {
-                setLoading(true);
-                const response = await api.get('/api/projects');
-                setProjects(response.data);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching projects:', error);
-                // Fallback to dummy data if API fails
-                setProjects(DUMMY_PROJECTS);
-                setLoading(false);
-            }
-        };
-
-        fetchProjects();
-
-        // Logic for handling post-add confirmation message
-        try {
-            const params = new URLSearchParams(location.search);
-            if (params.get('added') === '1') {
-                setShowAddedMsg(true);
-                navigate(location.pathname, { replace: true });
-                setTimeout(() => setShowAddedMsg(false), 4000);
-            }
-        } catch (e) { /* silent fail */ }
-
-        // Listen for project updates from admin dashboard
-        const handleStorageChange = () => {
-            fetchProjects();
-        };
-
-        window.addEventListener('storage', handleStorageChange);
-        
-        // Also poll for updates periodically when user is on portfolio page
-        const interval = setInterval(() => {
-            const lastUpdate = localStorage.getItem('projects-updated');
-            if (lastUpdate) {
-                fetchProjects();
-                localStorage.removeItem('projects-updated');
-            }
-        }, 1000);
-
-        return () => {
-            window.removeEventListener('storage', handleStorageChange);
-            clearInterval(interval);
-        };
-    }, [location.search, navigate, location.pathname]);
 
     // Filter projects based on category
     const filterProjects = (projects, filter) => {
@@ -195,9 +110,7 @@ const Portfolio = () => {
         return projects.filter(project => project.category === expectedCategory);
     };
 
-    const filteredProjects = filterProjects(projects, filter);
-
-    const filterButtons = [
+    const filteredProjects = filterProjects(PROJECTS, filter);
         { label: 'All', value: 'all', icon: <CodeIcon className="w-5 h-5" /> },
         { label: 'Web Development', value: 'webDev', icon: <LaptopIcon className="w-5 h-5" /> },
         { label: 'App Development', value: 'appDev', icon: <MobileIcon className="w-5 h-5" /> },
