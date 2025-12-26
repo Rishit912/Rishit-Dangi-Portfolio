@@ -47,6 +47,15 @@ app.get("/ping", (req, res) => {
     res.status(200).json({ error: false, message: "Pong" });
 });
 
+// Health check route
+app.get("/api/health", (req, res) => {
+    res.status(200).json({ 
+        status: "ok", 
+        timestamp: new Date(),
+        mongoUrl: process.env.MONGO_URL ? "✅ Set" : "❌ Not set"
+    });
+});
+
 // Admin setup endpoint (KEEPING THIS TEMPORARILY)
 // This is used by your new frontend button to register the first admin.
 app.post("/api/auth/register", async (req, res) => {
