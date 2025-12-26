@@ -19,8 +19,8 @@ const checkDb = (req, res, next) => {
   next();
 };
 
-// Add Project - NOW PROTECTED BY ADMIN ROLE
-router.post("/add", checkDb, verifyToken, verifyAdmin, async (req, res) => {
+// Add Project - PUBLIC (No authentication required)
+router.post("/add", checkDb, async (req, res) => {
     const { title, description, techStack, imageUrls, github, liveDemo, category } = req.body;
 
     try {
@@ -66,8 +66,8 @@ router.get("/", async (req, res) => {
     }
 });
 
-// Edit project - NOW PROTECTED BY ADMIN ROLE
-router.put("/:id", checkDb, verifyToken, verifyAdmin, async (req, res) => {
+// Edit project - PUBLIC (No authentication required)
+router.put("/:id", checkDb, async (req, res) => {
   try {
     const updated = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updated) return res.status(404).json({ message: "Project not found" });
@@ -78,8 +78,8 @@ router.put("/:id", checkDb, verifyToken, verifyAdmin, async (req, res) => {
   }
 });
 
-// Delete project - NOW PROTECTED BY ADMIN ROLE
-router.delete("/:id", checkDb, verifyToken, verifyAdmin, async (req, res) => {
+// Delete project - PUBLIC (No authentication required)
+router.delete("/:id", checkDb, async (req, res) => {
   try {
     const deleted = await Project.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ message: "Project not found" });
@@ -90,8 +90,8 @@ router.delete("/:id", checkDb, verifyToken, verifyAdmin, async (req, res) => {
   }
 });
 
-// Reorder projects - NOW PROTECTED BY ADMIN ROLE
-router.patch('/reorder', checkDb, verifyToken, verifyAdmin, async (req, res) => {
+// Reorder projects - PUBLIC (No authentication required)
+router.patch('/reorder', checkDb, async (req, res) => {
   try {
     const { orderedIds } = req.body;
     if (!Array.isArray(orderedIds)) return res.status(400).json({ message: 'orderedIds must be an array' });

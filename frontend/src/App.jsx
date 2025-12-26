@@ -9,7 +9,6 @@ import Footer from './components/Footer'
 import Home from './components/Home'
 import TechStack from "./components/TechStack";
 import AdminDashboard from "./components/AdminDashboard";
-import SecretAdminLink from "./components/SecretAdminLink";
 import Preloader from './components/Preloader';
 import resume from './assets/Dangi_Rishit_.pdf';
 import image from './assets/airbnb.png';
@@ -53,8 +52,7 @@ function App() {
          <Route path="/techstack" element={<TechStack />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/admin-link/:key" element={<SecretAdminLink />} />
-    <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
     {/* Ensure admin routes render the AdminDashboard container so the left admin sidebar stays visible
       when navigating to team management. AdminDashboard will detect the path and render the
       appropriate embedded view (projects or team). */}

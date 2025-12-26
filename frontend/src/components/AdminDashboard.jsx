@@ -10,9 +10,6 @@ const AdminDashboard = () => {
     const [showModal, setShowModal] = useState(false);
     const [editingProject, setEditingProject] = useState(null);
     const [projects, setProjects] = useState([]);
-    
-    // Function to get the current token for API calls
-    const getToken = () => localStorage.getItem("token");
 
     const handleOpenModal = () => {
         setEditingProject(null);
@@ -20,30 +17,20 @@ const AdminDashboard = () => {
     };
 
     const fetchProjects = async () => {
-        const token = getToken();
-        // The token is mandatory for admin views
-        // FIX: Include the Authorization header here
-        const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-        
         try {
-            const res = await api.get(`/api/projects`, config);
+            const res = await api.get(`/api/projects`);
             setProjects(res.data);
         } catch(error) {
-             console.error("Error fetching projects for admin:", error);
+             console.error("Error fetching projects:", error);
              setProjects([]);
         }
     };
 
     const persistProjectOrder = async (list) => {
-        const token = getToken();
-        if (!token) return console.error("Missing token for reorder action.");
-
         try {
             const orderedIds = list.map(p => p._id || p.id);
             // Use shared `api` instance for persisting project order
-            await api.patch(`/api/projects/reorder`, { orderedIds }, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            await api.patch(`/api/projects/reorder`, { orderedIds });
             // Re-fetch to confirm order from server
             fetchProjects(); 
         } catch (err) {
@@ -77,14 +64,11 @@ const AdminDashboard = () => {
     }, []);
 
     const handleDelete = async (id) => {
-        const token = getToken();
         if (!window.confirm("Delete this project?")) return;
 
         try {
             // Use shared `api` instance for deleting a project
-            await api.delete(`/api/projects/${id}`, {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            await api.delete(`/api/projects/${id}`);
             fetchProjects();
             try {
                 localStorage.setItem('projects-updated', Date.now().toString());
