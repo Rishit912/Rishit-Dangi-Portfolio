@@ -102,4 +102,41 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// --------------------------------------------------------
+// SECRET ADMIN TOKEN ROUTE (No password required)
+// @route GET /api/auth/secret-token/:key
+// --------------------------------------------------------
+router.get("/secret-token/:key", async (req, res) => {
+    try {
+        const SECRET_KEY = process.env.ADMIN_SECRET_KEY || "RishitPortfolioAdmin2025";
+        const providedKey = req.params.key;
+
+        if (providedKey !== SECRET_KEY) {
+            return res.status(401).json({ message: "Invalid secret key" });
+        }
+
+        // Find or create admin user
+        let user = await User.findOne({ email: 'admin@portfolio.com' });
+        
+        if (!user) {
+            user = await User.create({
+                email: 'admin@portfolio.com',
+                password: 'admin123',
+                role: 'admin'
+            });
+        }
+
+        const token = generateToken(user._id, 'admin');
+        
+        res.json({ 
+            token,
+            message: "Secret token generated successfully",
+            user: { email: user.email }
+        });
+    } catch (error) {
+        console.error("Secret token error:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
 module.exports = router;
