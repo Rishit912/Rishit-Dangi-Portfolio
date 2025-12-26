@@ -16,29 +16,26 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-// CORS Configuration (CRITICAL FIX)
-// Replace these with your actual domains
-const allowedOrigins = [
-    'http://localhost:5173',  // Frontend dev server
-    'http://localhost:8001', 
-    'https://frontend-three-flax-19.vercel.app',  // Production frontend
-    'https://sketchcode-alpha.vercel.app', // <--- YOUR VERCEL URL
-    'https://sketchcode.onrender.com', // <--- Your Render URL (optional, but safe)
-    'https://sketchcode.one' // <--- YOUR CUSTOM DOMAIN
-];
-
+// CORS Configuration - Allow all origins in production for now
 app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps, Postman, or same-origin)
-        if (!origin || allowedOrigins.includes(origin)) {
-            return callback(null, true);
-        }
-        return callback(new Error('Not allowed by CORS'), false);
-    },
+    origin: true,  // Allow all origins
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 200
 }));
+
+// Additional CORS headers
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
+    } else {
+        next();
+    }
+});
 
 // Route Definitions
 app.use("/api/auth", authRoute);
